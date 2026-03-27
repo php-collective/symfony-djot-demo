@@ -216,4 +216,23 @@
     <pre><code>extensions:
     - type: semantic_span</code></pre>
 </div>
+
+<div class="card">
+    <h2>Code Group</h2>
+    <p>Transforms code-group divs into tabbed code block interfaces. Labels are extracted from the language hint using <code>[Label]</code> suffix syntax.</p>
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ code_group_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered</h3>
+            <div class="rendered">
+                {{ code_group_html|raw }}
+            </div>
+        </div>
+    </div>
+    <pre><code>extensions:
+    - type: code_group</code></pre>
+</div>
 {% endblock %}

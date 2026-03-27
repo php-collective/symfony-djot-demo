@@ -168,6 +168,8 @@ DJOT;
         DjotConverterInterface $frontmatterConverter,
         #[Autowire(service: 'symfony_djot.converter.with_semantic')]
         DjotConverterInterface $semanticConverter,
+        #[Autowire(service: 'symfony_djot.converter.with_code_group')]
+        DjotConverterInterface $codeGroupConverter,
     ): Response {
         // Autolink demo
         $autolinkSource = <<<'DJOT'
@@ -276,6 +278,25 @@ The term [API]{dfn="Application Programming Interface"} is important.
 [HTML]{abbr="HyperText Markup Language"} is the foundation of the web.
 DJOT;
 
+        // Code group demo
+        $codeGroupSource = <<<'DJOT'
+::: code-group
+``` php [Composer]
+composer require php-collective/djot
+```
+
+``` bash [NPM]
+npm install @example/djot
+```
+
+``` yaml [Docker]
+services:
+  app:
+    image: php:8.2
+```
+:::
+DJOT;
+
         return $this->render('demo/extensions.html.twig', [
             'autolink_source' => $autolinkSource,
             'autolink_html' => $djot->toHtml($autolinkSource),
@@ -297,6 +318,8 @@ DJOT;
             'frontmatter_html' => $frontmatterConverter->toHtml($frontmatterSource),
             'semantic_source' => $semanticSource,
             'semantic_html' => $semanticConverter->toHtml($semanticSource),
+            'code_group_source' => $codeGroupSource,
+            'code_group_html' => $codeGroupConverter->toHtml($codeGroupSource),
         ]);
     }
 }

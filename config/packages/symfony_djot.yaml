@@ -53,6 +53,10 @@ symfony_djot:
             safe_mode: false
             extensions:
                 - type: semantic_span
+        with_code_group:
+            safe_mode: false
+            extensions:
+                - type: code_group
     cache:
         enabled: false
         pool: cache.app

@@ -91,6 +91,41 @@
             .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
             .badge-safe { background: #28a745; color: #fff; }
             .badge-unsafe { background: #dc3545; color: #fff; }
+            /* Code Group Extension Styles */
+            .code-group {
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                overflow: hidden;
+                margin: 1em 0;
+            }
+            .code-group-radio { display: none; }
+            .code-group-label {
+                display: inline-block;
+                padding: 10px 20px;
+                background: #f5f5f5;
+                border-bottom: 2px solid transparent;
+                cursor: pointer;
+                font-weight: 500;
+                transition: background 0.2s, border-color 0.2s;
+            }
+            .code-group-label:hover { background: #e8e8e8; }
+            .code-group-panel { display: none; }
+            .code-group-panel pre { margin: 0; border-radius: 0; }
+            .code-group-radio:nth-of-type(1):checked ~ .code-group-label:nth-of-type(1),
+            .code-group-radio:nth-of-type(2):checked ~ .code-group-label:nth-of-type(2),
+            .code-group-radio:nth-of-type(3):checked ~ .code-group-label:nth-of-type(3),
+            .code-group-radio:nth-of-type(4):checked ~ .code-group-label:nth-of-type(4),
+            .code-group-radio:nth-of-type(5):checked ~ .code-group-label:nth-of-type(5) {
+                background: #fff;
+                border-bottom-color: #0066cc;
+            }
+            .code-group-radio:nth-of-type(1):checked ~ .code-group-panel:nth-of-type(1),
+            .code-group-radio:nth-of-type(2):checked ~ .code-group-panel:nth-of-type(2),
+            .code-group-radio:nth-of-type(3):checked ~ .code-group-panel:nth-of-type(3),
+            .code-group-radio:nth-of-type(4):checked ~ .code-group-panel:nth-of-type(4),
+            .code-group-radio:nth-of-type(5):checked ~ .code-group-panel:nth-of-type(5) {
+                display: block;
+            }
         </style>
         {% block stylesheets %}{% endblock %}
         {% block javascripts %}{% endblock %}
