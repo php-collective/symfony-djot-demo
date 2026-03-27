@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Twig Function Demo{% endblock %}
+
+{% block body %}
+<div class="card">
+    <h1>Twig Function Demo</h1>
+    <p>The <code>djot()</code> function is ideal for inline Djot strings in templates.</p>
+</div>
+
+<div class="card">
+    <h2>Basic Usage</h2>
+    <pre><code>{{ "{{ djot('_emphasis_ and *strong*') }}" }}</code></pre>
+    <p><strong>Result:</strong></p>
+    <div class="rendered">
+        {{ djot('_emphasis_ and *strong*') }}
+    </div>
+</div>
+
+<div class="card">
+    <h2>Inline Examples</h2>
+    <table style="width:100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background: #f0f0f0;">
+                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">Djot Input</th>
+                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">Rendered Output</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><code>*strong text*</code></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><div class="rendered">{{ djot('*strong text*') }}</div></td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><code>_emphasized text_</code></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><div class="rendered">{{ djot('_emphasized text_') }}</div></td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><code>`inline code`</code></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><div class="rendered">{{ djot('`inline code`') }}</div></td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><code>[link](https://djot.net)</code></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><div class="rendered">{{ djot('[link](https://djot.net)') }}</div></td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><code>H~2~O (subscript)</code></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><div class="rendered">{{ djot('H~2~O') }}</div></td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><code>E=mc^2^ (superscript)</code></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><div class="rendered">{{ djot('E=mc^2^') }}</div></td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><code>{=highlighted=}</code></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><div class="rendered">{{ djot('{=highlighted=}') }}</div></td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><code>{-deleted-} {+inserted+}</code></td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;"><div class="rendered">{{ djot('{-deleted-} {+inserted+}') }}</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h2>Plain Text Function</h2>
+    <pre><code>{{ "{{ djot_text('# Hello *World*') }}" }}</code></pre>
+    <p><strong>Result:</strong> <code>{{ djot_text('# Hello *World*')|trim }}</code></p>
+</div>
+
+<div class="card">
+    <h2>With Converter Profile</h2>
+    <p>Pass a converter name as the second argument to use a different profile:</p>
+    <pre><code>{{ "{{ djot(content, 'user_content') }}" }}</code></pre>
+    <p>See <a href="/safe-mode">Safe Mode Demo</a> for XSS protection examples.</p>
+</div>
+{% endblock %}

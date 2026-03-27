@@ -1,0 +1,58 @@
+symfony_djot:
+    converters:
+        default:
+            safe_mode: false
+            extensions:
+                - type: autolink
+                - type: external_links
+                  internal_hosts: ['localhost', 'example.com']
+                - type: smart_quotes
+                - type: heading_permalinks
+                  symbol: '#'
+                  position: after
+                  class: heading-anchor
+        user_content:
+            safe_mode: true
+        with_mentions:
+            safe_mode: false
+            extensions:
+                - type: mentions
+                  user_url_template: 'https://github.com/{username}'
+                  user_class: mention
+        with_toc:
+            safe_mode: false
+            extensions:
+                - type: table_of_contents
+                  toc_class: toc
+                - type: heading_permalinks
+        with_wikilinks:
+            safe_mode: false
+            extensions:
+                - type: wikilinks
+                  url_template: '/wiki/{page}'
+                  link_class: wiki-link
+        with_default_attrs:
+            safe_mode: false
+            extensions:
+                - type: default_attributes
+                  defaults:
+                      image:
+                          loading: lazy
+                          decoding: async
+                      table:
+                          class: table table-striped
+                      link:
+                          class: styled-link
+        with_frontmatter:
+            safe_mode: false
+            extensions:
+                - type: frontmatter
+                  default_format: yaml
+                  render_as_comment: true
+        with_semantic:
+            safe_mode: false
+            extensions:
+                - type: semantic_span
+    cache:
+        enabled: false
+        pool: cache.app

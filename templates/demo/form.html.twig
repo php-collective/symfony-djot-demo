@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Form Demo{% endblock %}
+
+{% block body %}
+<div class="card">
+    <h1>Form Integration Demo</h1>
+    <p>Use <code>DjotType</code> for form fields and <code>ValidDjot</code> for validation.</p>
+</div>
+
+<div class="columns">
+    <div class="card">
+        <h2>Article Form</h2>
+
+        {{ form_start(form) }}
+            <div>
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title) }}
+                {{ form_errors(form.title) }}
+            </div>
+
+            <div>
+                {{ form_label(form.body) }}
+                {{ form_widget(form.body) }}
+                {{ form_errors(form.body) }}
+                <small style="color: #666;">Supports <a href="https://djot.net" target="_blank">Djot markup</a></small>
+            </div>
+
+            <div>
+                {{ form_label(form.comment) }}
+                {{ form_widget(form.comment) }}
+                {{ form_errors(form.comment) }}
+                <small style="color: #666;">Uses strict validation and safe mode converter</small>
+            </div>
+
+            {{ form_widget(form.submit) }}
+        {{ form_end(form) }}
+    </div>
+
+    <div class="card">
+        <h2>Code</h2>
+
+        <h3>Form Type</h3>
+        <pre><code>use PhpCollective\SymfonyDjot\Form\Type\DjotType;
+
+$builder
+    ->add('body', DjotType::class)
+    ->add('comment', DjotType::class, [
+        'converter' => 'user_content',
+    ]);</code></pre>
+
+        <h3>Entity Validation</h3>
+        <pre><code>use PhpCollective\SymfonyDjot\Validator\Constraints\ValidDjot;
+
+class Article
+{
+    #[ValidDjot]
+    private string $body;
+
+    #[ValidDjot(strict: true)]
+    private string $comment;
+}</code></pre>
+    </div>
+</div>
+
+{% if preview %}
+<div class="card">
+    <h2>Preview</h2>
+
+    <h3>{{ preview.title }}</h3>
+
+    <div class="rendered">
+        {{ preview.body_html|raw }}
+    </div>
+
+    {% if preview.comment_html %}
+    <h4>Comment</h4>
+    <div class="rendered safe">
+        {{ preview.comment_html|raw }}
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

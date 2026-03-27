@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plain Text Demo{% endblock %}
+
+{% block body %}
+<div class="card">
+    <h1>Plain Text Extraction</h1>
+    <p>Extract plain text from Djot markup for search indexing, excerpts, or previews.</p>
+</div>
+
+<div class="columns">
+    <div class="card">
+        <h2>Source (Djot)</h2>
+        <pre><code>{{ source }}</code></pre>
+    </div>
+
+    <div class="card">
+        <h2>Plain Text Output</h2>
+        <pre><code>{{ text }}</code></pre>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Usage</h2>
+
+    <h3>In Twig</h3>
+    <pre><code>{# Filter syntax #}
+{{ "{{ article.body|djot_text }}" }}
+
+{# Function syntax #}
+{{ "{{ djot_text('# Hello *World*') }}" }}</code></pre>
+
+    <h3>In Services</h3>
+    <pre><code>$text = $djot->toText($djotContent);
+
+// Use for search indexing
+$searchIndex->index($article->getId(), $text);
+
+// Use for excerpts
+$excerpt = mb_substr($text, 0, 200) . '...';</code></pre>
+</div>
+
+<div class="card">
+    <h2>Use Cases</h2>
+    <ul>
+        <li><strong>Search indexing</strong> — Index plain text for full-text search</li>
+        <li><strong>Excerpts</strong> — Generate article previews without markup</li>
+        <li><strong>Meta descriptions</strong> — Auto-generate SEO descriptions</li>
+        <li><strong>Notifications</strong> — Send plain text emails or SMS</li>
+        <li><strong>Accessibility</strong> — Provide alt text or screen reader content</li>
+    </ul>
+</div>
+{% endblock %}

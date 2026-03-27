@@ -1,0 +1,219 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Extensions Demo{% endblock %}
+
+{% block body %}
+<div class="card">
+    <h1>Extensions Demo</h1>
+    <p>Djot supports various extensions to enhance markup capabilities.</p>
+</div>
+
+<div class="card">
+    <h2>Autolink</h2>
+    <p>Automatically converts bare URLs to clickable links.</p>
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ autolink_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered</h3>
+            <div class="rendered">
+                {{ autolink_html|raw }}
+            </div>
+        </div>
+    </div>
+    <pre><code>extensions:
+    - type: autolink</code></pre>
+</div>
+
+<div class="card">
+    <h2>External Links</h2>
+    <p>Adds <code>target="_blank"</code> and <code>rel="noopener noreferrer"</code> to external links.</p>
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ external_links_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered</h3>
+            <div class="rendered">
+                {{ external_links_html|raw }}
+            </div>
+        </div>
+    </div>
+    <pre><code>extensions:
+    - type: external_links
+      internal_hosts: ['localhost', 'example.com']</code></pre>
+</div>
+
+<div class="card">
+    <h2>Smart Quotes</h2>
+    <p>Converts straight quotes to typographic ("curly") quotes.</p>
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ smart_quotes_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered</h3>
+            <div class="rendered">
+                {{ smart_quotes_html|raw }}
+            </div>
+        </div>
+    </div>
+    <pre><code>extensions:
+    - type: smart_quotes</code></pre>
+</div>
+
+<div class="card">
+    <h2>Heading Permalinks</h2>
+    <p>Adds anchor links to headings for easy linking.</p>
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ heading_permalinks_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered</h3>
+            <div class="rendered">
+                {{ heading_permalinks_html|raw }}
+            </div>
+        </div>
+    </div>
+    <pre><code>extensions:
+    - type: heading_permalinks
+      symbol: '#'
+      position: after
+      class: heading-anchor</code></pre>
+</div>
+
+<div class="card">
+    <h2>Mentions</h2>
+    <p>Converts @username to clickable profile links.</p>
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ mentions_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered</h3>
+            <div class="rendered">
+                {{ mentions_html|raw }}
+            </div>
+        </div>
+    </div>
+    <pre><code>extensions:
+    - type: mentions
+      user_url_template: 'https://github.com/{username}'
+      user_class: mention</code></pre>
+</div>
+
+<div class="card">
+    <h2>Table of Contents</h2>
+    <p>Generates a table of contents from headings. Use <code>{toc}</code> placeholder.</p>
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ toc_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered</h3>
+            <div class="rendered">
+                {{ toc_html|raw }}
+            </div>
+        </div>
+    </div>
+    <pre><code>extensions:
+    - type: table_of_contents
+      toc_class: toc</code></pre>
+</div>
+
+<div class="card">
+    <h2>Wikilinks</h2>
+    <p>Supports <code>[[Page Name]]</code> wiki-style links.</p>
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ wikilinks_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered</h3>
+            <div class="rendered">
+                {{ wikilinks_html|raw }}
+            </div>
+        </div>
+    </div>
+    <pre><code>extensions:
+    - type: wikilinks
+      url_template: '/wiki/{page}'
+      link_class: wiki-link</code></pre>
+</div>
+
+<div class="card">
+    <h2>Default Attributes</h2>
+    <p>Automatically adds default attributes to elements by type (e.g., lazy loading for images).</p>
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ default_attrs_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered (inspect HTML)</h3>
+            <div class="rendered">
+                {{ default_attrs_html|raw }}
+            </div>
+        </div>
+    </div>
+    <pre><code>extensions:
+    - type: default_attributes
+      defaults:
+          image:
+              loading: lazy
+              decoding: async
+          table:
+              class: table table-striped
+          link:
+              class: styled-link</code></pre>
+</div>
+
+<div class="card">
+    <h2>Frontmatter</h2>
+    <p>Parses YAML/TOML/JSON frontmatter blocks at the start of documents.</p>
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ frontmatter_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered (check HTML source for comment)</h3>
+            <div class="rendered">
+                {{ frontmatter_html|raw }}
+            </div>
+        </div>
+    </div>
+    <pre><code>extensions:
+    - type: frontmatter
+      default_format: yaml
+      render_as_comment: true</code></pre>
+</div>
+
+<div class="card">
+    <h2>Semantic Spans</h2>
+    <p>Converts span attributes to semantic HTML5 elements: <code>&lt;kbd&gt;</code>, <code>&lt;dfn&gt;</code>, <code>&lt;abbr&gt;</code>.</p>
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ semantic_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered</h3>
+            <div class="rendered">
+                {{ semantic_html|raw }}
+            </div>
+        </div>
+    </div>
+    <pre><code>extensions:
+    - type: semantic_span</code></pre>
+</div>
+{% endblock %}

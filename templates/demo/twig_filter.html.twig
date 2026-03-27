@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Twig Filter Demo{% endblock %}
+
+{% block body %}
+<div class="card">
+    <h1>Twig Filter Demo</h1>
+    <p>The <code>|djot</code> filter converts Djot markup to HTML.</p>
+</div>
+
+<div class="card">
+    <h2>Basic Usage: |djot</h2>
+    <pre><code>{{ "{{ content|djot }}" }}</code></pre>
+
+    <div class="columns">
+        <div>
+            <h3>Source (Djot)</h3>
+            <pre><code>{{ djot_content }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered (HTML)</h3>
+            <div class="rendered">
+                {{ djot_content|djot }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Plain Text: |djot_text</h2>
+    <pre><code>{{ "{{ content|djot_text }}" }}</code></pre>
+    <p>Extracts plain text, useful for search indexing or excerpts:</p>
+    <pre><code>{{ djot_content|djot_text }}</code></pre>
+</div>
+
+<div class="card">
+    <h2>Multiple Converter Profiles</h2>
+    <pre><code>{{ "{{ user_content|djot('user_content') }}" }}</code></pre>
+    <p>Use different profiles for different security contexts:</p>
+
+    <div class="columns">
+        <div>
+            <h3>Source (User Content)</h3>
+            <pre><code>{{ user_content }}</code></pre>
+        </div>
+        <div>
+            <h3>Rendered (Safe Mode)</h3>
+            <div class="rendered safe">
+                <span class="badge badge-safe">safe_mode: true</span>
+                {{ user_content|djot('user_content') }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

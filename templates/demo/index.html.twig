@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symfony Djot Bundle Demo{% endblock %}
+
+{% block body %}
+<div class="card">
+    <h1>Symfony Djot Bundle Demo</h1>
+    <p>This demo application showcases all features of the <code>php-collective/symfony-djot</code> bundle.</p>
+</div>
+
+<div class="columns">
+    <div class="card">
+        <h2>Twig Filter</h2>
+        <p>Convert Djot markup to HTML using the <code>|djot</code> filter.</p>
+        <pre><code>{{ "{{ article.body|djot }}" }}</code></pre>
+        <p><a href="{{ path('twig_filter') }}">View Demo &rarr;</a></p>
+    </div>
+
+    <div class="card">
+        <h2>Twig Function</h2>
+        <p>Use <code>djot()</code> function for inline strings.</p>
+        <pre><code>{{ "{{ djot('*bold*') }}" }}</code></pre>
+        <p><a href="{{ path('twig_function') }}">View Demo &rarr;</a></p>
+    </div>
+
+    <div class="card">
+        <h2>Service Injection</h2>
+        <p>Inject <code>DjotConverterInterface</code> in your services.</p>
+        <pre><code>$html = $djot->toHtml($content);</code></pre>
+        <p><a href="{{ path('service') }}">View Demo &rarr;</a></p>
+    </div>
+
+    <div class="card">
+        <h2>Form Integration</h2>
+        <p>Use <code>DjotType</code> for form fields with Djot input.</p>
+        <pre><code>$builder->add('body', DjotType::class);</code></pre>
+        <p><a href="{{ path('form') }}">View Demo &rarr;</a></p>
+    </div>
+
+    <div class="card">
+        <h2>Safe Mode</h2>
+        <p>XSS protection for untrusted user content.</p>
+        <pre><code>safe_mode: true</code></pre>
+        <p><a href="{{ path('safe_mode') }}">View Demo &rarr;</a></p>
+    </div>
+
+    <div class="card">
+        <h2>Plain Text</h2>
+        <p>Extract plain text for search indexing or previews.</p>
+        <pre><code>{{ "{{ content|djot_text }}" }}</code></pre>
+        <p><a href="{{ path('plain_text') }}">View Demo &rarr;</a></p>
+    </div>
+
+    <div class="card">
+        <h2>Extensions</h2>
+        <p>Extend Djot with autolinks, mentions, TOC, wikilinks, and more.</p>
+        <pre><code>extensions:
+    - type: mentions
+    - type: table_of_contents</code></pre>
+        <p><a href="{{ path('extensions') }}">View Demo &rarr;</a></p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Service Demo{% endblock %}
+
+{% block body %}
+<div class="card">
+    <h1>Service Injection Demo</h1>
+    <p>Inject <code>DjotConverterInterface</code> directly into your controllers and services.</p>
+</div>
+
+<div class="card">
+    <h2>Default Converter</h2>
+    <pre><code>use PhpCollective\SymfonyDjot\Service\DjotConverterInterface;
+
+public function show(DjotConverterInterface $djot): Response
+{
+    $html = $djot->toHtml($content);
+    $text = $djot->toText($content);
+}</code></pre>
+
+    <div class="columns">
+        <div>
+            <h3>Source</h3>
+            <pre><code>{{ djot_source }}</code></pre>
+        </div>
+        <div>
+            <h3>toHtml() Output</h3>
+            <div class="rendered">
+                {{ html|raw }}
+            </div>
+        </div>
+    </div>
+
+    <h3>toText() Output</h3>
+    <pre><code>{{ text }}</code></pre>
+</div>
+
+<div class="card">
+    <h2>Named Converter (Safe Mode)</h2>
+    <pre><code>use Symfony\Component\DependencyInjection\Attribute\Autowire;
+
+public function show(
+    #[Autowire(service: 'symfony_djot.converter.user_content')]
+    DjotConverterInterface $safeConverter,
+): Response {
+    $html = $safeConverter->toHtml($userContent);
+}</code></pre>
+
+    <div class="columns">
+        <div>
+            <h3>Source (User Content)</h3>
+            <pre><code>{{ user_source }}</code></pre>
+        </div>
+        <div>
+            <h3>Safe Mode Output</h3>
+            <div class="rendered safe">
+                <span class="badge badge-safe">XSS Protected</span>
+                {{ safe_html|raw }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Configuration</h2>
+    <pre><code># config/packages/symfony_djot.yaml
+symfony_djot:
+    converters:
+        default:
+            safe_mode: false
+        user_content:
+            safe_mode: true
+    cache:
+        enabled: true
+        pool: cache.app</code></pre>
+</div>
+{% endblock %}
