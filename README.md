@@ -86,9 +86,10 @@ symfony_djot:
 
 ### Extensions
 
-The demo showcases all 10 available extensions:
+The demo showcases all 11 available extensions:
 
 - **Autolink** - Converts bare URLs to links
+- **Code Group** - Transforms code-group divs into tabbed interfaces
 - **Default Attributes** - Adds default attributes to elements
 - **External Links** - Adds `target="_blank"` to external links
 - **Frontmatter** - Parses YAML/TOML/JSON frontmatter
