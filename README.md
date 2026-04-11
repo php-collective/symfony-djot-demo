@@ -2,6 +2,8 @@
 
 A demo application showcasing all features of the [php-collective/symfony-djot](https://github.com/php-collective/symfony-djot) bundle.
 
+![Twig Filter Demo](docs/screenshots/twig-filter.png)
+
 ## Requirements
 
 - PHP 8.2+
@@ -27,6 +29,14 @@ php -S localhost:8000 -t public
 ```
 
 Then open http://localhost:8000 in your browser.
+
+## Screenshots
+
+**Home** — overview of all features:
+
+![Home](docs/screenshots/home.png)
+
+**Twig Filter** demo (shown at the top of this README) — `|djot` filter with side-by-side source/rendered output.
 
 ## Demo Pages
 
