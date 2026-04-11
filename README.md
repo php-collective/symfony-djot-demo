@@ -103,7 +103,3 @@ The demo showcases all 11 available extensions:
 ## Configuration
 
 See `config/packages/symfony_djot.yaml` for example configurations of all features.
-
-## License
-
-MIT
